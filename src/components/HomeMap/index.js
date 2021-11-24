@@ -54,21 +54,22 @@ export default function HomeMap() {
                 onClick={(e) => {
                   e.preventDefault();
                   setSelectedSpot(spot);
+                  togglePopup(true)
                 }}
               >
-                <img src="./skateboarding.svg" alt="Skate Park Icon" width="20px" height="20px" />
+                <img src="./icon_point.svg" alt="Skate Park Icon" width="40px" height="20px" />
               </button>
             </Marker>
           );
         })}
-         {showPopup && <Popup
+        {showPopup && selectedSpot && <Popup
           latitude={selectedSpot[1]}
           longitude={selectedSpot[0]}
           closeButton={true}
           closeOnClick={false}
           onClose={() => togglePopup(false)}
           anchor="top" >
-          <div>You are here</div>
+          <div>Hello je suis là</div>
         </Popup>}
       </ReactMapGL>
     </div>
