@@ -7,6 +7,7 @@ import Header from "components/Header";
 import FirstComponentExercice from 'exercices/FirstComponent'
 import StylingComponentsExercice from 'exercices/StylingComponents'
 import ContextsExercice from 'exercices/Contexts'
+import HomeMap from "../components/HomeMap";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <ContextsExercice />
         </Route>
         <Route path="/">
-          <FirstComponentExercice />
+          <HomeMap />
         </Route>
       </Switch>
     </BrowserRouter>
