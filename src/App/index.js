@@ -1,34 +1,55 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import { CssBaseline, Grid } from "@material-ui/core";
 
-import Header from "components/Header";
-
-// Exercices
-import FirstComponentExercice from 'exercices/FirstComponent'
-import StylingComponentsExercice from 'exercices/StylingComponents'
-import ContextsExercice from 'exercices/Contexts'
+import { getPlacesData } from "../api"
 import HomeMap from "../components/HomeMap";
+import Header from "../components/Header/Header";
+import List from "../components/List/List";
+import PlaceDetails from "../components/PlaceDetails/PlaceDetails";
+import { LngLatBounds } from 'mapbox-gl';
 
-function App() {
+const App = () => {
+  const [places,setPlaces] = useState([]);
+
+  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0});
+  const [bounds, setBounds] = useState(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude} }) => {
+
+    })
+  }, []);
+
+  useEffect(() => {
+    console.log(coordinates, bounds);
+
+    getPlacesData()
+      .then((data) => {
+          console.log(data);
+
+          setPlaces(data);
+      })
+  }, [coordinates, bounds]);
+
   return (
-    <BrowserRouter>
+    <>
+      <CssBaseline />
       <Header />
-      <Switch>
-        <Route path="/first-component">
-          <FirstComponentExercice />
-        </Route>
-        <Route path="/styling-components">
-          <StylingComponentsExercice />
-        </Route>
-        <Route path="/contexts">
-          <ContextsExercice />
-        </Route>
-        <Route path="/">
-          <HomeMap />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
+      <Grid container spacing={3} style={{ width:'100%' }}>
+        <Grid item xs={12} md={4}>
+          <List places={places} />
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <HomeMap 
+            setCoordinates={setCoordinates}
+            setBounds={setBounds}
+            coordinates={coordinates}
+          />
+        </Grid>
+      </Grid>
+    </>
+  )
 }
 
 export default App;

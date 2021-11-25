@@ -3,13 +3,19 @@ import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactMapGL, { Marker, Popup, FullscreenControl, GeolocateControl, NavigationControl } from "react-map-gl";
-// import * as parkDate from "./data/skateboard-parks.json";
+import { Paper, Typography, useMediaQuery } from "@material-ui/core";
+import LocationOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import Rating from "@material-ui/lab";
 
-export default function HomeMap() {
+import useStyles from './styles';
+
+export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
+  const classes = useStyles();
+  const isMobile = useMediaQuery('(min-width:600px)');
   const [viewport, setViewport] = useState({
     latitude: 44.837789,
     longitude: -0.57918,
-    width: "100vw",
+    width: "100%",
     height: "100vh",
     zoom: 11,
   });
@@ -39,7 +45,6 @@ export default function HomeMap() {
 
   const handleViewportChange = useCallback((newViewport) => setViewport(newViewport), []);
 
-  // if you are happy with Geocoder default settings, you can just use handleViewportChange directly
   const handleGeocoderViewportChange = useCallback((newViewport) => {
     const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
@@ -69,12 +74,16 @@ export default function HomeMap() {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onClick={handleClick}
+        onChange={(e) => {
+          setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
         ref={mapRef}
         onViewportChange={handleViewportChange}
       >
         <FullscreenControl style={fullscreenControlStyle} />
         <GeolocateControl style={geolocateControlStyle} positionOptions={{ enableHighAccuracy: true }} trackUserLocation={true} auto />
-        <Geocoder mapRef={mapRef} onViewportChange={handleGeocoderViewportChange} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} position="top-left" marker={false}/>
+        <Geocoder mapRef={mapRef} onViewportChange={handleGeocoderViewportChange} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} position="top-right" marker={false}/>
         <NavigationControl style={navControlStyle} />
         {spotMarkers.map((spot, idx) => {
           console.log(spot);
