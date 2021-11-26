@@ -1,15 +1,16 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useContext } from "react";
 import ReactMapGL, { Marker, Popup, FullscreenControl, GeolocateControl, NavigationControl } from "react-map-gl";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import Rating from "@material-ui/lab";
 
 import useStyles from './styles';
+import Context from "../../lib/context";
 
-export default function HomeMap({ setCoordinates, setBounds, coordinates, places }) {
+export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
   const classes = useStyles();
   const isMobile = useMediaQuery('(min-width:600px)');
   const [viewport, setViewport] = useState({
@@ -34,12 +35,13 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
 
   const [selectedSpot, setSelectedSpot] = useState(null);
   const [spotMarkers, setSpotMarkers] = useState([]);
+  const { spots, setSpots } = useContext(Context)
   const [showPopup, togglePopup] = React.useState(false);
 
   function handleClick(event) {
     // console.log(event);
     // console.table(spotMarkers);
-    setSpotMarkers([...spotMarkers, event.lngLat]);
+    setSpots([...spots, event.lngLat]);
   }
   const mapRef = useRef();
 
@@ -55,7 +57,6 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
   }, []);
 
   useEffect(() => {
-    // setSpotMarkers([...spotMarkers, ...places])
 
 
     const listener = (e) => {
@@ -65,24 +66,11 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
     };
     window.addEventListener("keydown", listener);
 
-
-
     return () => {
       window.removeEventListener("keydown", listener);
     };
   }, []);
 
-  useEffect(() => {
-    console.log(places)
-    let newMarkers = places.map(elm =>
-      [Number(elm.longitude), Number(elm.latitude)]
-    ).filter(e => Boolean(e[0]))
-
-
-
-    setSpotMarkers([...spotMarkers, ...newMarkers])
-
-  }, [places])
 
   return (
     <div>
@@ -104,10 +92,10 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
         <Geocoder mapRef={mapRef} onViewportChange={handleGeocoderViewportChange} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} position="top-right" marker={false} />
         <NavigationControl style={navControlStyle} />
 
-        {spotMarkers.map((spot, idx) => {
+        {spots.map((spot, idx) => {
           // console.log(spot);
           return (
-            <Marker key={"marker-spot-" + idx} latitude={spot[1]} longitude={spot[0]}>
+            <Marker key={"marker-spot-" + idx} latitude={spot.latitude} longitude={spot.longitude}>
               <button
                 className="marker-btn"
                 onClick={(e) => {
@@ -124,8 +112,8 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
 
         {showPopup && selectedSpot &&
           <Popup
-            latitude={selectedSpot[1]}
-            longitude={selectedSpot[0]}
+            latitude={selectedSpot.longitude}
+            longitude={selectedSpot.latitude}
             closeButton={true}
             closeOnClick={false}
             onClose={() => togglePopup(false)}

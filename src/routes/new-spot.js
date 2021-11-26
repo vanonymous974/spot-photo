@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import Context from '../lib/context'
 import useLocalState from '../lib/useLocalState'
 
 function NewSpot() {
-    const [spots, setSpots] = useLocalState([])
-    const [formData, setFormData] = useState({})
+    const { spots, setSpots } = useContext(Context)
 
     //Valide le form
     function handleSubmit(event) {
@@ -18,8 +18,8 @@ function NewSpot() {
             const element = event.target[i];
             console.log(element)
             if (element.nodeName == 'INPUT') {
-                
-                    //Transformer Longitude et latitude en number pour + lisible pour mapbox
+
+                //Transformer Longitude et latitude en number pour + lisible pour mapbox
                 if (element.name == 'longitude' || element.name == "latitude") {
                     formResult[element.name] = Number(element.value)
                 } else {
@@ -54,17 +54,18 @@ function NewSpot() {
                     </label>
                     <input type="text" name="city" id="city" />
                 </div>
-                <div>
-                    <label htmlFor="longitude">
-                        Longitude
-                    </label>
-                    <input type="text" name="longitude" id="longitude" />
-                </div>
+               
                 <div>
                     <label htmlFor="latitude">
                         Latitude
                     </label>
                     <input type="text" name="latitude" id="latitude" />
+                </div>
+                <div>
+                    <label htmlFor="longitude">
+                        Longitude
+                    </label>
+                    <input type="text" name="longitude" id="longitude" />
                 </div>
                 <button type="submit">Créer mon spot</button>
             </form>

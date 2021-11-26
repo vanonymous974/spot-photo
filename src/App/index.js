@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid } from "@material-ui/core";
-
 import { getPlacesData } from "../api"
 import HomeMap from "../components/HomeMap";
 import Header from "../components/Header/Header";
