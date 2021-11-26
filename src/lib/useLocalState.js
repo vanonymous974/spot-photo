@@ -1,14 +1,14 @@
-import React from "react"
+import React from "react";
 
 // Stocke les données des spots dans le navigateur
 export default function useLocalState(defaultValue, key) {
-	const [value, setValue] = React.useState(() => {
-		const stickyValue = window.localStorage.getItem(key)
+  const [value, setValue] = React.useState(() => {
+    const stickyValue = window.localStorage.getItem(key);
 
-		return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue
-	})
-	React.useEffect(() => {
-		window.localStorage.setItem(key, JSON.stringify(value))
-	}, [key, value])
-	return [value, setValue]
+    return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
+  });
+  React.useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
 }

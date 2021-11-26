@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 
 const SecondComponent = (props) => {
@@ -8,22 +8,20 @@ const SecondComponent = (props) => {
     <div
       style={{
         backgroundColor: color,
-        padding: '10px'
+        padding: "10px",
       }}
     >
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
-  )
-}
+  );
+};
 
 SecondComponent.defaultProps = {
-  color: 'green'
-}
+  color: "green",
+};
 
 SecondComponent.propTypes = {
-  color: PropTypes.string
-}
+  color: PropTypes.string,
+};
 
-export default SecondComponent
+export default SecondComponent;
