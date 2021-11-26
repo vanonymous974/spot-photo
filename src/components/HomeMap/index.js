@@ -55,6 +55,9 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
   }, []);
 
   useEffect(() => {
+    // setSpotMarkers([...spotMarkers, ...places])
+
+
     const listener = (e) => {
       if (e.key === "Escape") {
         setSelectedSpot(null);
@@ -62,10 +65,27 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
     };
     window.addEventListener("keydown", listener);
 
+
+
     return () => {
       window.removeEventListener("keydown", listener);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(places)
+    let newMarkers = places.map(elm =>
+      [Number(elm.longitude), Number(elm.latitude)]
+    ).filter(e => Boolean(e[0]))
+
+
+
+    setSpotMarkers([...spotMarkers, ...newMarkers])
+
+  }, [places])
+
+
+
 
   return (
     <div>
@@ -80,38 +100,15 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
         }}
         ref={mapRef}
         onViewportChange={handleViewportChange}
-      > 
+      >
         <FullscreenControl style={fullscreenControlStyle} />
-         {places?.map((place, i) =>(
-            <div
-                // className={classes.markerContainer}
-                // latitude={Number(place.latitude)}
-                // longitude={Number(place.longitude)}
-                key={i}
-            >
-              {
-                isMobile ? (
-                  <LocationOnOutlinedIcon color="primary" fontSize="large"/>
-                ) : (
-                      <Paper elevation={3} classeName={classes.paper}>
-                        <Typography className={classes.typography} variant="subtitle2" gutterBottom>
-                          {place.name}
-                        </Typography>
-                        <img 
-                            className={classes.pointer}
-                            src={place.photo ? place.photo.images.large.url : "https://images.unsplash.com/photo-1527489377706-5bf97e608852?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGFuZHNjYXBlfHx8fHx8MTYzNzg1MzgyNg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080"}
-                            alt={place.name}
-                            />
-                      </Paper>
-                )
-                }
-            </div>
-         ))}
+   
         <GeolocateControl style={geolocateControlStyle} positionOptions={{ enableHighAccuracy: true }} trackUserLocation={true} auto />
-        <Geocoder mapRef={mapRef} onViewportChange={handleGeocoderViewportChange} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} position="top-right" marker={false}/>
+        <Geocoder mapRef={mapRef} onViewportChange={handleGeocoderViewportChange} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} position="top-right" marker={false} />
         <NavigationControl style={navControlStyle} />
+
         {spotMarkers.map((spot, idx) => {
-          console.log(spot);
+          // console.log(spot);
           return (
             <Marker key={"marker-spot-" + idx} latitude={spot[1]} longitude={spot[0]}>
               <button
@@ -122,21 +119,23 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
                   togglePopup(true)
                 }}
               >
-                <img src="./icon_point.svg" alt="Skate Park Icon" width="40px" height="20px" />
+                <img src="./icon_point.svg" alt="Pin Icon" width="40px" height="20px" />
               </button>
             </Marker>
           );
         })}
-        {showPopup && selectedSpot && <Popup
-          latitude={selectedSpot[1]}
-          longitude={selectedSpot[0]}
-          closeButton={true}
-          closeOnClick={false}
-          onClose={() => togglePopup(false)}
-          anchor="top" >
-          <div>Hello je suis là</div>
-        </Popup>}
-        
+
+        {showPopup && selectedSpot &&
+          <Popup
+            latitude={selectedSpot[1]}
+            longitude={selectedSpot[0]}
+            closeButton={true}
+            closeOnClick={false}
+            onClose={() => togglePopup(false)}
+            anchor="top" >
+            <div>Hello je suis là</div>
+          </Popup>}
+
       </ReactMapGL>
     </div>
   );

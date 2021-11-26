@@ -26,7 +26,7 @@ const App = () => {
 
     getPlacesData()
       .then((data) => {
-          console.log(data);
+          // console.log(data);
 
           setPlaces(data);
       })
@@ -40,8 +40,6 @@ const App = () => {
         <Grid item xs={12} md={4}>
           <List 
             places={places}
-
-
           />
         </Grid>
         <Grid item xs={12} md={8}>
