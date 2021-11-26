@@ -84,9 +84,6 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates, places
 
   }, [places])
 
-
-
-
   return (
     <div>
       <ReactMapGL
