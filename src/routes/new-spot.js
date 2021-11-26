@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Context from "../lib/context";
-import useLocalState from "../lib/useLocalState";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
@@ -27,6 +26,8 @@ function NewSpot() {
         }
       }
     }
+
+    formResult["date"] = new Date()
 
     // Ajoute à la const setSpots les données de formResult
     setSpots([...spots, formResult]);

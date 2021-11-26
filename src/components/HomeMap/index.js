@@ -1,26 +1,17 @@
+import { useMediaQuery } from "@material-ui/core";
 import "mapbox-gl/dist/mapbox-gl.css";
-import Geocoder from "react-map-gl-geocoder";
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useContext,
+  useCallback, useContext, useEffect, useRef, useState
 } from "react";
 import ReactMapGL, {
-  Marker,
-  Popup,
   FullscreenControl,
-  GeolocateControl,
-  NavigationControl,
+  GeolocateControl, Marker, NavigationControl, Popup
 } from "react-map-gl";
-import { Paper, Typography, useMediaQuery } from "@material-ui/core";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-import Rating from "@material-ui/lab";
-
-import useStyles from "./styles";
+import Geocoder from "react-map-gl-geocoder";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Context from "../../lib/context";
+import useStyles from "./styles";
+
 
 export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
   const classes = useStyles();

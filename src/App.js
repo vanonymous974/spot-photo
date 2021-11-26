@@ -6,11 +6,13 @@ import Context from "./lib/context";
 import useLocalState from "./lib/useLocalState";
 
 export default function App() {
+    // Variable d'état stocker sur le browser
   const [spots, setSpots] = useLocalState([], "spots");
 
   const context = {
     spots: spots,
     setSpots: setSpots,
+    
   };
 
   return (

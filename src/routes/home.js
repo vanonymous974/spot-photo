@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
 import { CssBaseline, Grid } from "@material-ui/core";
-
-import { getPlacesData } from "../api";
-import HomeMap from "../components/HomeMap";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
-import List from "../components/List/List";
-import PlaceDetails from "../components/PlaceDetails/PlaceDetails";
-import { LngLatBounds } from "mapbox-gl";
+import HomeMap from "../components/HomeMap";
+
 
 const Home = () => {
   //   const [places,setPlaces] = useState([]);
