@@ -17,9 +17,6 @@ const Header = () => {
           SpotShare
         </Typography>
         <Box display="flex">
-          <Typography variant="h6" className={classes.title}>
-            Explore new places
-          </Typography>
           <Button variant="contained" size="medium">
           <Link to="/new-spot">Ajouter un spot</Link>
           </Button>

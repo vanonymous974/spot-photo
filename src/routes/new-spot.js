@@ -28,7 +28,7 @@ function NewSpot() {
       }
     }
 
-    formResult["date"] = new Date()
+    // formResult["date"] = new Date()
 
     // Ajoute à la const setSpots les données de formResult
     setSpots([...spots, formResult]);
