@@ -25,15 +25,15 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
   });
   const fullscreenControlStyle = {
     right: 10,
-    top: 10,
+    top: 30,
   };
   const geolocateControlStyle = {
     right: 10,
-    top: 50,
+    top: 70,
   };
   const navControlStyle = {
     right: 10,
-    top: 90,
+    top: 110,
   };
 
   const [selectedSpot, setSelectedSpot] = useState(null);
