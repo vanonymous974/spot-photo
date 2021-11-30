@@ -1,6 +1,6 @@
 import React from "react";
 import { Autocomplete } from "@material-ui/lab";
-import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, InputBase, Box, Button } from "@material-ui/core";
 import { mergeClasses } from "@material-ui/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -20,7 +20,9 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Explore new places
           </Typography>
+          <Button variant="contained" size="medium">
           <Link to="/new-spot">Ajouter un spot</Link>
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

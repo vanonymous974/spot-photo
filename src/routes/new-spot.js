@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Context from "../lib/context";
+import Geocoder from "react-map-gl-geocoder";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
