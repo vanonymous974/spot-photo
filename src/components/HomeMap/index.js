@@ -41,11 +41,11 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
   const { spots, setSpots } = useContext(Context);
   const [showPopup, togglePopup] = React.useState(false);
 
-  function handleClick(event) {
-    // console.log(event);
-    // console.table(spotMarkers);
-    setSpots([...spots, event.lngLat]);
-  }
+  // function handleClick(event) {
+  //   // console.log(event);
+  //   // console.table(spotMarkers);
+  //   setSpots([...spots, event.lngLat]);
+  // }
   const mapRef = useRef();
 
   const handleViewportChange = useCallback(
@@ -81,7 +81,7 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/streets-v11"
-        onClick={handleClick}
+        // onClick={handleClick}
         onChange={(e) => {
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
