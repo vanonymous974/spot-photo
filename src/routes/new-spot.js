@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import Context from "../lib/context";
 import Geocoder from "react-map-gl-geocoder";
+import { Card, CardContent, CardActions } from "@material-ui/core";
+import styles from "../components/HomeMap/styles";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
@@ -36,31 +38,36 @@ function NewSpot() {
   }
 
   return (
+
     <div>
-      <h1>New</h1>
+      <Card sx={{ maxWidth: 100 }}>
+        <h1>New</h1>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Nom du spot</label>
+              <input type="text" name="name" id="name" />
+            </div>
+            <div>
+              <label htmlFor="city">Ville</label>
+              <input type="text" name="city" id="city" />
+            </div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nom du spot</label>
-          <input type="text" name="name" id="name" />
-        </div>
-        <div>
-          <label htmlFor="city">Ville</label>
-          <input type="text" name="city" id="city" />
-        </div>
-
-        <div>
-          <label htmlFor="latitude">Latitude</label>
-          <input type="text" name="latitude" id="latitude" />
-        </div>
-        <div>
-          <label htmlFor="longitude">Longitude</label>
-          <input type="text" name="longitude" id="longitude" />
-        </div>
-        <button type="submit">Créer mon spot</button>
-      </form>
-
-      <pre>{JSON.stringify(spots, null, 4)}</pre>
+            <div>
+              <label htmlFor="latitude">Latitude</label>
+              <input type="text" name="latitude" id="latitude" />
+            </div>
+            <div>
+              <label htmlFor="longitude">Longitude</label>
+              <input type="text" name="longitude" id="longitude" />
+            </div>
+            <CardActions>
+              <button type="submit">Créer mon spot</button>
+            </CardActions>
+          </form>
+        </CardContent>
+        {/* <pre>{JSON.stringify(spots, null, 4)}</pre> */}
+      </Card >
     </div>
   );
 }
