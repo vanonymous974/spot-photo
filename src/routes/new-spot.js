@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import Context from "../lib/context";
 import Geocoder from "react-map-gl-geocoder";
+import "./new-spot.css" ;
+import { Button } from "@material-ui/core" ;
+import { Link } from "react-router-dom";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
@@ -36,8 +39,8 @@ function NewSpot() {
   }
 
   return (
-    <div>
-      <h1>New</h1>
+    <div className="form">
+      <h1>Ajouter un spot</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -57,10 +60,11 @@ function NewSpot() {
           <label htmlFor="longitude">Longitude</label>
           <input type="text" name="longitude" id="longitude" />
         </div>
-        <button type="submit">Créer mon spot</button>
+        <button className="buttons" type="submit">Créer mon spot</button>
+        <button className="buttons" onclick="window.location.href='./'"><Link to="/">Retour à la map</Link></button>
       </form>
 
-      <pre>{JSON.stringify(spots, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(spots, null, 4)}</pre> */}
     </div>
   );
 }

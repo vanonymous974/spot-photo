@@ -135,14 +135,14 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
 
         {showPopup && selectedSpot && (
           <Popup
-            latitude={selectedSpot.longitude}
-            longitude={selectedSpot.latitude}
+            latitude={selectedSpot.latitude}
+            longitude={selectedSpot.longitude}
             closeButton={true}
             closeOnClick={false}
             onClose={() => togglePopup(false)}
             anchor="top"
           >
-            <div>Hello je suis là</div>
+            <div>{selectedSpot.name}</div>
           </Popup>
         )}
       </ReactMapGL>
