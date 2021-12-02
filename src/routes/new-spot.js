@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import Context from "../lib/context";
-import Geocoder from "react-map-gl-geocoder";
-import "./new-spot.css" ;
-import { Button } from "@material-ui/core" ;
+import "../components/NewSpot/new-spot.css";
 import { Link } from "react-router-dom";
+import Geocoding from "../components/NewSpot/Geocoding";
+import { Alert } from "@material-ui/lab";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [geocodingResult, setGeocodingResult] = useState({});
 
   //Valide le form
   function handleSubmit(event) {
@@ -17,20 +18,24 @@ function NewSpot() {
     // Initialisation de la variable qui va contenir les valeurs du form
     let formResult = {};
 
+    debugger
+
     // Parcours le tableau des éléments HTML du form
     for (let i = 0; i < event.target.length; i++) {
       const element = event.target[i];
-      console.log(element);
-      if (element.nodeName == "INPUT") {
+      if (element.nodeName == "INPUT" && element.value !== "") {
         //Transformer Longitude et latitude en number pour + lisible pour mapbox
-        if (element.name == "longitude" || element.name == "latitude") {
-          formResult[element.name] = Number(element.value);
-        } else {
-          //Ajoute à formResult les valeurs trouvés dans les inputs du form
-          formResult[element.name] = element.value;
-        }
+        // if (element.name == "longitude" || element.name == "latitude") {
+        //   formResult[element.name] = Number(element.value);
+        // } else {
+        //Ajoute à formResult les valeurs trouvés dans les inputs du form
+        formResult[element.name] = element.value;
+        // }
       }
     }
+
+    formResult.longitude = geocodingResult.value.center[0];
+    formResult.latitude = geocodingResult.value.center[1];
 
     // formResult["date"] = new Date()
 
@@ -44,32 +49,33 @@ function NewSpot() {
       <h1>Ajouter un spot</h1>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nom du spot</label>
-          <input type="text" name="name" id="name" />
+        <div className="namespot">
+          <label htmlFor="name">Nom du spot</label><br />
+          <input type="text" name="name" id="name" placeholder="Skatepark..." />
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="city">Ville</label>
           <input type="text" name="city" id="city" />
-        </div>
+        </div> */}
 
         <div>
-          <label htmlFor="latitude">Latitude</label>
-          <input type="text" name="latitude" id="latitude" />
+          <Geocoding handleResult={(value) => setGeocodingResult(value)} />
         </div>
         <div>
-          <label htmlFor="longitude">Longitude</label>
-          <input type="text" name="longitude" id="longitude" />
+          <input
+            type="file"
+            value={selectedFile}
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          />
         </div>
-        <div>
-        <input
-          type="file"
-          value={selectedFile}
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
-        </div>
-        <button className="buttons" type="submit">Créer mon spot</button>
-        <button className="buttons" onclick="window.location.href='./'"><Link to="/">Retour à la map</Link></button>
+        <button className="buttons"><Link to="/">Retour à la map</Link></button>
+
+        <button className="buttons" type="submit" onClick={() => alert("Votre spot a été ajouté")}>
+          Créer mon spot
+        </button>
+        <button className="buttons">
+          <Link to="/">Retour à la map</Link>
+        </button>
       </form>
 
       {/* <pre>{JSON.stringify(spots, null, 4)}</pre> */}
