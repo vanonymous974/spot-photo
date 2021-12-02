@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Context from "../lib/context";
 import Geocoder from "react-map-gl-geocoder";
 import "./new-spot.css" ;
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 function NewSpot() {
   const { spots, setSpots } = useContext(Context);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   //Valide le form
   function handleSubmit(event) {
@@ -59,6 +60,13 @@ function NewSpot() {
         <div>
           <label htmlFor="longitude">Longitude</label>
           <input type="text" name="longitude" id="longitude" />
+        </div>
+        <div>
+        <input
+          type="file"
+          value={selectedFile}
+          onChange={(e) => setSelectedFile(e.target.files[0])}
+        />
         </div>
         <button className="buttons" type="submit">Créer mon spot</button>
         <button className="buttons" onclick="window.location.href='./'"><Link to="/">Retour à la map</Link></button>
