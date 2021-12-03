@@ -59,13 +59,13 @@ function NewSpot() {
         <div>
           <Geocoding handleResult={(value) => setGeocodingResult(value)} />
         </div>
-        <div>
+        {/* <div>
           <input
             type="file"
             value={selectedFile}
             onChange={(e) => setSelectedFile(e.target.files[0])}
           />
-        </div>
+        </div> */}
 
         <button className="buttons" type="submit" onClick={() => alert("Votre spot a été ajouté")}>
           Créer mon spot
