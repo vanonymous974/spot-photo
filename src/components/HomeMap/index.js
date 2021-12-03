@@ -13,6 +13,9 @@ import Context from "../../lib/context";
 import useStyles from "./styles";
 import "./home.css"
 
+// eslint-disable-next-line import/no-webpack-loader-syntax
+ReactMapGL.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 
 export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
   const classes = useStyles();
