@@ -68,7 +68,6 @@ function NewSpot() {
             onChange={(e) => setSelectedFile(e.target.files[0])}
           />
         </div>
-        <button className="buttons"><Link to="/">Retour à la map</Link></button>
 
         <button className="buttons" type="submit" onClick={() => alert("Votre spot a été ajouté")}>
           Créer mon spot
