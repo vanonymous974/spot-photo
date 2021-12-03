@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^5.8.0",
+    "@craco/craco": "^5.9.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
@@ -16,11 +16,11 @@
     "node-fetch": "^3.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.17",
     "react-map-gl-geocoder": "^2.2.0",
     "react-router-dom": "6",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "^4.0.3",
     "react-select": "^5.2.1",
     "spotify-web-api-js": "^1.5.1",
     "web-vitals": "^0.2.4"
