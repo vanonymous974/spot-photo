@@ -6,7 +6,7 @@ import React, {
 import ReactMapGL, {
   FullscreenControl,
   GeolocateControl, Marker, NavigationControl, Popup
-} from "react-map-gl";
+} from "!react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Context from "../../lib/context";
@@ -14,7 +14,7 @@ import useStyles from "./styles";
 import "./home.css"
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-ReactMapGL.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+// ReactMapGL.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 
 export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
