@@ -8,4 +8,7 @@ module.exports = {
       'exercices': path.resolve(__dirname, './src/exercices')
     },
   },
+  eslint: {
+    enable: false
+  },
 };
