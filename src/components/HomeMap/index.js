@@ -11,6 +11,7 @@ import Geocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Context from "../../lib/context";
 import useStyles from "./styles";
+import "./home.css"
 
 
 export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
@@ -112,8 +113,10 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
               key={"marker-spot-" + idx}
               latitude={spot.latitude}
               longitude={spot.longitude}
+              offsetLeft={-26}
+              offsetTop={-40}
             >
-              <button
+              <button 
                 className="marker-btn"
                 onClick={(e) => {
                   e.preventDefault();
@@ -122,10 +125,10 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
                 }}
               >
                 <img
-                  src="./icon_point.svg"
+                  src="./placeholder.png"
                   alt="Pin Icon"
                   width="40px"
-                  height="20px"
+                  height="40px"
                 />
               </button>
             </Marker>
@@ -140,6 +143,7 @@ export default function HomeMap({ setCoordinates, setBounds, coordinates }) {
             closeOnClick={false}
             onClose={() => togglePopup(false)}
             anchor="top"
+            offsetTop={5}
           >
             <div>{selectedSpot.name}</div>
           </Popup>

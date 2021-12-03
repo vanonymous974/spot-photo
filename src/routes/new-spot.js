@@ -18,8 +18,6 @@ function NewSpot() {
     // Initialisation de la variable qui va contenir les valeurs du form
     let formResult = {};
 
-    debugger
-
     // Parcours le tableau des éléments HTML du form
     for (let i = 0; i < event.target.length; i++) {
       const element = event.target[i];

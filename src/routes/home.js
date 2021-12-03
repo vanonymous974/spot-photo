@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import HomeMap from "../components/HomeMap";
 
-
 const Home = () => {
   //   const [places,setPlaces] = useState([]);
 
@@ -11,9 +10,7 @@ const Home = () => {
   const [bounds, setBounds] = useState(null);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {}
-    );
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {});
   }, []);
 
   //   useEffect(() => {
@@ -31,11 +28,7 @@ const Home = () => {
     <>
       <CssBaseline />
       <Header />
-          <HomeMap
-            setCoordinates={setCoordinates}
-            setBounds={setBounds}
-            coordinates={coordinates}
-          />
+      <HomeMap setCoordinates={setCoordinates} setBounds={setBounds} coordinates={coordinates} />
     </>
   );
 };
